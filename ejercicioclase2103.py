@@ -46,7 +46,7 @@ def CDF_c(x):
     else:
         return 1
 
-# Función para generar y graficar el histograma, PDF, y CDF
+# Función para generar el histograma, PDF y CDF acumulada experimental
 def generar_histograma(distribucion, b_param=None):
     num_samples = 1000000
     uniform_samples = np.random.random(num_samples)
@@ -73,10 +73,15 @@ def generar_histograma(distribucion, b_param=None):
         print("❌ Opción no válida. Intenta de nuevo.")
         return
 
-    # Crear subgráficos para el histograma/PDF y la CDF
-    fig, axs = plt.subplots(1, 2, figsize=(15, 5))
+    # Crear histograma de frecuencia relativa
+    hist, bin_edges = np.histogram(data, bins=100, density=True)
+    bin_centers = (bin_edges[:-1] + bin_edges[1:]) / 2  # Obtener los puntos centrales
+
+    # Cálculo de la CDF acumulada experimental
+    fr_acumulada = np.cumsum(hist) * (bin_edges[1] - bin_edges[0])
 
     # Gráfico 1: Histograma y PDF
+    fig, axs = plt.subplots(1, 2, figsize=(15, 5))
     axs[0].hist(data, bins=100, density=True, alpha=0.75, color='blue', label="Histograma de muestras")
     axs[0].plot(x_vals, pdf_vals, 'r-', label="Función de densidad teórica (PDF)")
     axs[0].set_title(f'Histograma y PDF - {title}')
@@ -84,9 +89,10 @@ def generar_histograma(distribucion, b_param=None):
     axs[0].set_ylabel('Densidad')
     axs[0].legend()
 
-    # Gráfico 2: CDF
-    axs[1].plot(x_vals, cdf_vals, 'g-', label="Función de densidad acumulada (CDF)")
-    axs[1].set_title(f'CDF - {title}')
+    # Gráfico 2: CDF acumulada experimental
+    axs[1].bar(bin_centers, fr_acumulada, width=(bin_edges[1] - bin_edges[0]), alpha=0.6, color='purple', label="CDF experimental acumulada")
+    axs[1].plot(x_vals, cdf_vals, 'g-', label="CDF teórica")
+    axs[1].set_title(f'CDF acumulada experimental - {title}')
     axs[1].set_xlabel('Valor')
     axs[1].set_ylabel('Probabilidad acumulada')
     axs[1].legend()
