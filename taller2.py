@@ -66,7 +66,7 @@ def tiempo_promedio_espera():
     return 1 / (mu - lambd)
 
 # Simulación M/M/1
-def simular_mm1(tiempo_simulacion=200):
+def simular_mm1(tiempo_simulacion=2000):
     reloj = 0
     cola = queue.Queue()
     tiempos_espera = []
@@ -101,13 +101,7 @@ def simular_mm1(tiempo_simulacion=200):
     promedio_espera = np.mean(tiempos_espera) if tiempos_espera else 0
     print(f"\nTiempo promedio de espera (simulado): {promedio_espera:.4f}")
 
-    # Histograma de tiempos de espera
-    plt.hist(tiempos_espera, bins=30, density=True, alpha=0.7, color='skyblue')
-    plt.title("Histograma de tiempos de espera")
-    plt.xlabel("Tiempo de espera")
-    plt.ylabel("Frecuencia")
-    plt.grid(True)
-    plt.show()
+    # Se ha eliminado el histograma de tiempos de espera que estaba aquí
 
 # Submenú Punto 2
 def menu_punto2():
