@@ -21,15 +21,15 @@ dis = pygame.display.set_mode((dis_width, dis_height))
 pygame.display.set_caption('Snake con Balón')
 
 # Carga de imágenes
-snake_image = pygame.image.load("Python/img/escbarca.png")
+snake_image = pygame.image.load("img/escbarca.png")
 snake_image = pygame.transform.scale(snake_image, (block_size, block_size))
 snake_image.set_colorkey(pink)
 
-background_image = pygame.image.load("Python/img/cancha.jpg")
+background_image = pygame.image.load("img/cancha.jpg")
 background_image = pygame.transform.scale(background_image, (dis_width, dis_height))
 
 # Imagen del balón como comida
-ball_image = pygame.image.load("Python/img/balonfut.jpg")
+ball_image = pygame.image.load("img/balonfut.jpg")
 ball_image = pygame.transform.scale(ball_image, (block_size, block_size))
 ball_image.set_colorkey(pink)
 

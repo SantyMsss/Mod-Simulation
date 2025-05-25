@@ -1,2 +1,2 @@
 
-Prev_Event_Time = 0.0 # Time of last event
+GRAVITY = 0.3            # Reduced gravity
